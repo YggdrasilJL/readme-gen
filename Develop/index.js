@@ -6,6 +6,7 @@ const fs = require("fs")
 const chalkWarn = chalk.bold.whiteBright.bgRed
 const chalkMsg = chalk.bold.yellow.bgMagenta
 const chalkPrefix = chalk.green
+const success = chalk.bold.bgGreen
 console.log(chalkWarn('-----> Just press "Enter" if a section does not apply. <-----\n'))
 
   inquirer
@@ -83,7 +84,7 @@ console.log(chalkWarn('-----> Just press "Enter" if a section does not apply. <-
 function writeToFile(fileName, data) {
     
     fs.writeFile(fileName, data, error => {
-        if (error) throw error
-        console.log('Readme file saved successfully! Check your folder.')
+        if (error) {throw error} else {
+        console.log(`Readme file saved ${success('successfully!')} Check your folder.`)}
     })
 }
