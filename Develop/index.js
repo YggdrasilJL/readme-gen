@@ -1,75 +1,89 @@
-// TODO: Include packages needed for this application
 const chalk = require("chalk");
 const inquirer = require("inquirer");
 const generateMarkdown = require("./utils/generateMarkdown");
-// TODO: Create an array of questions for user input
-const chalkInfo = chalk.bold.whiteBright.bgRed
-console.log(chalkInfo('-----> Make sure to just press "Enter" if a section does not apply. <-----'))
+const fs = require("fs")
 
-const questions = inquirer.prompt([
+const chalkWarn = chalk.bold.whiteBright.bgRed
+const chalkMsg = chalk.bold.yellow.bgMagenta
+const chalkPrefix = chalk.green
+console.log(chalkWarn('-----> Just press "Enter" if a section does not apply. <-----\n'))
+
+  inquirer
+   .prompt([
     {
         type: 'input',
-        message: 'Title of project:',
+        message: chalkMsg('Title of project:\n'),
         name: 'title'
     },
     {
         type: 'input',
-        message: 'Please enter description:',
+        message: chalkMsg('Please enter description:\n'),
         name: 'desc'
     },
     {
-        type: 'input',
-        message: 'Table of contents:',
-        name: 'table'
+        type: 'checkbox',
+        message: chalkMsg('Table of contents:\n'),
+        name: 'table',
+        prefix: chalkWarn('\n--> Check off ones that apply to your project.') + chalkPrefix('\n\n?'),
+        choices: [
+            {name: 'Installation'},
+            {name: 'Usage'},
+            {name: 'Contributions'},
+            {name: 'Testing'},
+            {name: 'Questions'}
+        ]
     },
     {
         type: 'input',
-        message: 'Installation requirements:',
+        message: chalkMsg('Installation requirements:\n'),
         name: 'install'
     },
     {
         type: 'input',
-        message: 'How to use:',
+        message: chalkMsg('How to use:\n'),
         name: 'usage'
     },
     {
-        type: 'input',
-        message: 'License:',
+        type: 'list',
+        message: chalkMsg('License:\n'),
+        choices: ['Apache 2.0','MIT','Mozilla','None'],
         name: 'license'
     },
     {
         type: 'input',
-        message: 'Explain if you want contributions or not:',
+        message: chalkMsg('Explain if you want contributions or not:\n'),
         name: 'contrb'
     },
     {
         type: 'input',
-        message: 'Testing:',
+        message: chalkMsg('Testing:\n'),
         name: 'test'
     },
     {
         type: 'input',
-        message: 'Where can they reach you if the user has questions?',
-        name: 'quest'
+        message: chalkMsg('What is your GitHub username?\n'),
+        name: 'github'
+    },
+    {
+        type: 'input',
+        message: chalkMsg('What is your email?\n'),
+        name: 'email'
     }
 ])
-.then(userResponse => {
-    const mdContent = generateMarkdown(userResponse)
+.then(data => {
+    const mdContent = generateMarkdown(data)
+    writeToFile('README.md', mdContent)
     
 })
 .catch(error => {
     console.error('An error occurred...:', error)
 })
 
-// TODO: Create a function to write README file
+
 function writeToFile(fileName, data) {
-
+    
+    fs.writeFile(fileName, data, error => {
+        if (error) throw error
+        console.log('Readme file saved successfully! Check your folder.')
+    })
 }
-
-// TODO: Create a function to initialize app
-function init() {
-
-}
-
-// Function call to initialize app
-init();
