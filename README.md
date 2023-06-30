@@ -24,12 +24,17 @@ To use the README Generator, run the following command inside the "Develop" dire
 
     npm index.js
 
+Follow [This](https://clipchamp.com/watch/zvCQvvW03YF) video to visualize how it works.
 
-Answer the prompts with the appropriate information about your project to generate the README.md file.
+
+Answer the prompts with the appropriate information about your project to generate a proper README.md file.
+
+If you do not have a specific section in your README, just press enter when prompted for it, then you can simply remove the "# example" from the generated README file.
 
 ## Contribution
 
 Contributions are welcome!
+
 
 # Credits
 

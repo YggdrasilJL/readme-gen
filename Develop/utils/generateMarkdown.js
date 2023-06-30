@@ -47,10 +47,10 @@ ${data.install}\n
 ---
 ${data.usage}\n
 
-## Contribution \n
+## Contributions \n
 ---
 ${data.contrb}\n
-## Tests \n
+## Testing \n
 ---
 ${data.test}\n
 ## Questions \n
